@@ -1,0 +1,21 @@
+{
+  "name": "Rubic-cubes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tagzara/Rubic-cubes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tagzara/Rubic-cubes/issues"
+  },
+  "homepage": "https://github.com/tagzara/Rubic-cubes#readme"
+}
