@@ -10,10 +10,29 @@ const create = (name, description, imageUrl, difficulty) => {
     Cube.add(cube);
 };
 
+const search = (text, from, to) => {
+    let result = Cube.cubes;
+
+    if (text) {
+        result = result.filter(x => x.name.toLocaleLowerCase().includes(text.toLocaleLowerCase()));
+    }
+
+    if (from) {
+        result = result.filter(x => x.difficulty >= from)
+    }
+
+    if (to) {
+        result = result.filter(x => x.difficulty <= to)
+    }
+
+    return result;
+};
+
 const cubeService = { 
     getOne,
     getAll,
     create,
+    search
 };
 
 module.exports = cubeService;
