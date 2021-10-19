@@ -1,4 +1,5 @@
 const Cube = require('../models/Cube.js');
+const Accessory = require('../models/Accessory.js');
 
 const getAll = () => Cube.find({}).lean();
 
@@ -33,11 +34,20 @@ const search = (text, from, to) => {
     return result;
 };
 
+const attachAccessory = async (cubeId, accessoryId) => {
+    let cube = await Cube.findById(cubeId);
+    let accessory = await Accessory.findById(accessoryId);
+
+    cube.accessories.push(accessory);
+    return cube.save();
+};
+
 const cubeService = {
     getOne,
     getAll,
     create,
-    search
+    search,
+    attachAccessory,
 };
 
 module.exports = cubeService;
