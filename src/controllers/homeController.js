@@ -28,8 +28,10 @@ const search = async (req, res) => {
         cubes });
 };
 
+
 router.get('/', home);
 router.get('/about', about);
 router.get('/search', search);
 
 module.exports = router;
+
