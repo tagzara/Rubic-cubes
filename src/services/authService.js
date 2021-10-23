@@ -1,5 +1,6 @@
 const User = require('../models/User.js');
-const bcrypt = require('bcrypt');
+const { jwtSign } = require('../utils/tokenUtils.js');
+const { SECRET } = require('../constants.js');
 
 // with named export
 exports.register = function (username, password, repeatPassword) {
@@ -21,3 +22,11 @@ exports.login = function (username, password) {
             return null;
         });
 };
+
+exports.createToken = function (user) {
+    let payload = {
+        _id: user._id,
+        username: user.username
+    }
+    return jwtSign(payload, SECRET);
+}
