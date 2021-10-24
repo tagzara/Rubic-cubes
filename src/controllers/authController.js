@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const authService = require('../services/authService.js');
-const { createToken } = require('../utils/tokenUtils.js');
 
 router.get('/login', (req, res) => {
     res.render('auth/login');
@@ -11,11 +10,15 @@ router.post('/login', async (req, res) => {
 
     let user = await authService.login(username, password);
 
-    if (user) {
-        res.redirect('/');
-    } else {
-        res.redirect('/404');
+    if (!user) {
+        return res.redirect('/404');
     }
+
+    let token = await authService.createToken(user);
+    res.cookie('app_token', token, {
+        httpOnly: true,
+    });
+    res.redirect('/');
 });
 
 router.get('/register', (req, res) => {
@@ -26,8 +29,7 @@ router.post('/register', async (req, res) => {
     try {
         let { username, password, repeatPassword } = req.body;
 
-        let user = await authService.register(username, password, repeatPassword);
-        let token = await createToken(user);
+        await authService.register(username, password, repeatPassword);
 
         res.redirect('/login');
     } catch (error) {
