@@ -43,6 +43,8 @@ const attachAccessory = async (cubeId, accessoryId) => {
     return cube.save();
 };
 
+const updateCube = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
+
 const deleteCube = (cubeId) => Cube.findByIdAndDelete(cubeId);
 
 const cubeService = {
@@ -51,6 +53,7 @@ const cubeService = {
     create,
     search,
     attachAccessory,
+    updateCube,
     deleteCube,
 };
 
